@@ -22,6 +22,7 @@ class ViewController: UIViewController {
             if let coordinate = locationManager.location?.coordinate {
                 print("Latitude: \(coordinate.latitude) Longitude: \(coordinate.longitude)")
                 let weatherService = WeatherService()
+                weatherService.delegate = self
                 weatherService.getWeather(for: coordinate)
             }
         } else {
@@ -54,4 +55,16 @@ extension ViewController: CLLocationManagerDelegate {
             return false
         }
     }
+}
+
+extension ViewController: WeatherServiceDelegate {
+    
+    func weatherService(_ weatherService: WeatherService, didFail error: Error) {
+        
+    }
+    
+    func weatherService(_ weatherService: WeatherService, didUpdate weather: Weather) {
+        
+    }
+
 }
