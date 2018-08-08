@@ -10,14 +10,36 @@ import UIKit
 import CoreLocation
 import SVProgressHUD
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     var locationManager = CLLocationManager()
-    var weather : Weather?
+    var weather : Weather? {
+        didSet {
+            weatherInfoContainer.isHidden = false
+            updateUI()
+        }
+    }
+    
+    @IBOutlet weak var weatherInfoContainer: UIView!
+    @IBOutlet weak var currentConditionLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var windDirectionLabel: UILabel!
+    @IBOutlet weak var weatherIcon: UIImageView!
+    
+    @IBOutlet weak var statusLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearUI()
         setupLocationManager()
+        updateWeather()
+        weatherInfoContainer.isHidden = true
+        self.title = "Weather App"
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: UIButton) {
+        clearUI()
         updateWeather()
     }
     
@@ -30,16 +52,33 @@ class ViewController: UIViewController {
                 weatherService.getWeather(for: coordinate)
             }
         } else {
-            
+            statusLabel.text = "The app needs access to user location to work."
         }
+    }
+    
+    func clearUI() {
+        currentConditionLabel.text = ""
+        temperatureLabel.text = ""
+        windSpeedLabel.text = ""
+        windDirectionLabel.text = ""
+        statusLabel.text = ""
+        weatherIcon.image = nil
     }
     
     func updateUI() {
         guard let weather = weather else { return }
+        
+        currentConditionLabel.text = weather.currentCondition
+        temperatureLabel.text = String(weather.temperature) + "ºC"
+        windSpeedLabel.text = String(weather.windSpeed) + "mph"
+        windDirectionLabel.text = weather.windDirection()
+        weatherIcon.loadImageUsingCache(withUrl: weather.iconURLString())
+        
+        statusLabel.text = "Last updated: \(weather.dateString())"
     }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension MainViewController: CLLocationManagerDelegate {
 
     func setupLocationManager() {
         locationManager.delegate = self
@@ -65,15 +104,19 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 
-extension ViewController: WeatherServiceDelegate {
+extension MainViewController: WeatherServiceDelegate {
     
     func weatherService(_ weatherService: WeatherService, didFail errorDesc: String) {
         SVProgressHUD.showError(withStatus: errorDesc)
+        if let oldWeather = Weather.lastWeatherUpdate() {
+            weather = oldWeather
+        } else {
+            statusLabel.text = "No weather data"
+        }
     }
     
     func weatherService(_ weatherService: WeatherService, didUpdate weather: Weather) {
         SVProgressHUD.dismiss()
         self.weather = weather
-        updateUI()
     }
 }
