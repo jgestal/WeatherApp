@@ -20,6 +20,8 @@ class MainViewController: UIViewController {
         }
     }
     
+    var retrieveWeatherWhenLocationComesAvailable = false
+    
     @IBOutlet weak var weatherInfoContainer: UIView!
     @IBOutlet weak var currentConditionLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -44,12 +46,19 @@ class MainViewController: UIViewController {
     }
     
     func updateWeather() {
+        
         if isLocationServicesEnabled() {
             if let coordinate = locationManager.location?.coordinate {
                 SVProgressHUD.show()
+                statusLabel.text = ""
                 let weatherService = WeatherService()
                 weatherService.delegate = self
                 weatherService.getWeather(for: coordinate)
+            }
+            else {
+                print("*** No Location Available")
+                statusLabel.text = "Waiting for user location..."
+                retrieveWeatherWhenLocationComesAvailable = true
             }
         } else {
             statusLabel.text = "The app needs access to user location to work."
@@ -69,12 +78,12 @@ class MainViewController: UIViewController {
         guard let weather = weather else { return }
         
         currentConditionLabel.text = weather.currentCondition
-        temperatureLabel.text = String(weather.temperature) + "ºC"
-        windSpeedLabel.text = String(weather.windSpeed) + "mph"
+        temperatureLabel.text = String(weather.temperature) + " ºC"
+        windSpeedLabel.text = String(weather.windSpeed) + " mph"
         windDirectionLabel.text = weather.windDirection()
         weatherIcon.loadImageUsingCache(withUrl: weather.iconURLString())
         
-        statusLabel.text = "Last updated: \(weather.dateString())"
+        statusLabel.text = "Last update: \(weather.dateString())"
     }
 }
 
@@ -100,6 +109,18 @@ extension MainViewController: CLLocationManagerDelegate {
             }
         } else {
             return false
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("*** Location Manager: Did change Authorization")
+        updateWeather()
+    }
+ 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if retrieveWeatherWhenLocationComesAvailable {
+            updateWeather()
+            retrieveWeatherWhenLocationComesAvailable = false
         }
     }
 }
