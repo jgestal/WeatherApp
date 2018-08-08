@@ -9,19 +9,46 @@
 import Foundation
 import CoreLocation
 
-struct Weather {
+struct Weather: Codable {
+    
+    fileprivate static let kLastWeatherUpdate = "kLastWeatherUpdate"
+    
     let currentCondition : String
     let temperature : Double
     let pressure: Int
     let humidity: Int
     let windSpeed: Double
     let windDeg: Int
+    let timestamp: TimeInterval
+    
+    func save() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(self) {
+            UserDefaults.standard.set(encoded, forKey: Weather.kLastWeatherUpdate)
+        }
+    }
+    
+    func hasExpired() -> Bool {
+        let secondsPerDay = 86400.0
+        let now = Date.timeIntervalSinceReferenceDate
+        if now - timestamp < secondsPerDay {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    static func lastWeatherUpdate() -> Weather? {
+        let decoder = JSONDecoder()
+        if let weather = try? decoder.decode(Weather.self, from: UserDefaults.standard.value(forKey: Weather.kLastWeatherUpdate) as! Data) {
+            return weather.hasExpired() ? nil : weather
+        }
+        return nil
+    }
     
     static func weatherFromJSON(json: [String : AnyObject]) -> Weather? {
         
-        //print(json)
         guard
-            
             let main = json["main"] as? [String:AnyObject],
             let weather = json["weather"]?[0] as? [String:AnyObject],
             let wind = json["wind"] as? [String: AnyObject],
@@ -35,13 +62,16 @@ struct Weather {
         
         else { return nil }
 
-        return Weather(currentCondition: currentCondition, temperature: temperature, pressure: pressure, humidity: humidity, windSpeed: windSpeed, windDeg: windDeg)
+        let timestamp = Date.timeIntervalSinceReferenceDate
+        let updatedWeather = Weather(currentCondition: currentCondition, temperature: temperature, pressure: pressure, humidity: humidity, windSpeed: windSpeed, windDeg: windDeg, timestamp: timestamp)
+        updatedWeather.save()
+        return updatedWeather
     }
 }
 
 protocol WeatherServiceDelegate {
     func weatherService(_ weatherService: WeatherService, didUpdate weather: Weather)
-    func weatherService(_ weatherService: WeatherService, didFail error: Error)
+    func weatherService(_ weatherService: WeatherService, didFail errorDesc: String)
 }
 
 class WeatherService {
@@ -62,16 +92,20 @@ class WeatherService {
         let dataTask = URLSession.shared.dataTask(with: requestURL) { (data, response, error) in
             if let error = error {
                 print("*** Error: \(error.localizedDescription)")
-                self.delegate?.weatherService(self, didFail: error)
+                self.delegate?.weatherService(self, didFail: error.localizedDescription)
             } else {
                 do {
                     let weatherJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
-                    let weather = Weather.weatherFromJSON(json: weatherJSON)
-                    self.delegate?.weatherService(self, didUpdate: weather)
+                    if let weather = Weather.weatherFromJSON(json: weatherJSON) {
+                        self.delegate?.weatherService(self, didUpdate: weather)
+                    }
+                    else {
+                        self.delegate?.weatherService(self, didFail: "Unexpected response from server.")
+                    }
                 }
                 catch let error {
                     print("*** JSON Error: \(error.localizedDescription)")
-                    self.delegate?.weatherService(self, didFail: error)
+                    self.delegate?.weatherService(self, didFail: error.localizedDescription)
                 }
             }
         }

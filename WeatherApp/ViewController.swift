@@ -8,19 +8,23 @@
 
 import UIKit
 import CoreLocation
+import SVProgressHUD
 
 class ViewController: UIViewController {
 
     var locationManager = CLLocationManager()
+    var weather : Weather?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLocationManager()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        updateWeather()
+    }
+    
+    func updateWeather() {
         if isLocationServicesEnabled() {
             if let coordinate = locationManager.location?.coordinate {
-                print("Latitude: \(coordinate.latitude) Longitude: \(coordinate.longitude)")
+                SVProgressHUD.show()
                 let weatherService = WeatherService()
                 weatherService.delegate = self
                 weatherService.getWeather(for: coordinate)
@@ -28,6 +32,10 @@ class ViewController: UIViewController {
         } else {
             
         }
+    }
+    
+    func updateUI() {
+        guard let weather = weather else { return }
     }
 }
 
@@ -59,12 +67,13 @@ extension ViewController: CLLocationManagerDelegate {
 
 extension ViewController: WeatherServiceDelegate {
     
-    func weatherService(_ weatherService: WeatherService, didFail error: Error) {
-        
+    func weatherService(_ weatherService: WeatherService, didFail errorDesc: String) {
+        SVProgressHUD.showError(withStatus: errorDesc)
     }
     
     func weatherService(_ weatherService: WeatherService, didUpdate weather: Weather) {
-        
+        SVProgressHUD.dismiss()
+        self.weather = weather
+        updateUI()
     }
-
 }
