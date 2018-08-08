@@ -7,19 +7,51 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
+    var locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocationManager()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        if isLocationServicesEnabled() {
+            if let coordinate = locationManager.location?.coordinate {
+                print("Latitude: \(coordinate.latitude) Longitude: \(coordinate.longitude)")
+                let weatherService = WeatherService()
+                weatherService.getWeather(for: coordinate)
+            }
+        } else {
+            
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
+extension ViewController: CLLocationManagerDelegate {
+
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+    }
+
+    func isLocationServicesEnabled() -> Bool {
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("*** Location Authorized")
+                return true
+            default:
+                print("*** Location not Authorized")
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+}

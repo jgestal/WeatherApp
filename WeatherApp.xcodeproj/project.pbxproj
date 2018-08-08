@@ -13,6 +13,7 @@
 		23DBBA60211B25880009237E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA5F211B25880009237E /* Assets.xcassets */; };
 		23DBBA63211B25880009237E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA61211B25880009237E /* LaunchScreen.storyboard */; };
 		23DBBA6E211B25890009237E /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA6D211B25890009237E /* WeatherAppTests.swift */; };
+		23DBBA7B211B2F970009237E /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA7A211B2F970009237E /* WeatherService.swift */; };
 		9FE4814DF86586DE8A0CD2D2 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8EDE014A7965DC9ACF7F50 /* Pods_WeatherApp.framework */; };
 		DEC59F8DAB432B07E17808E6 /* Pods_WeatherAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3C5BC096969C19F8DE6011 /* Pods_WeatherAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		23DBBA69211B25880009237E /* WeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DBBA6D211B25890009237E /* WeatherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppTests.swift; sourceTree = "<group>"; };
 		23DBBA6F211B25890009237E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23DBBA7A211B2F970009237E /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		297A3779156B0B2A5EB355D8 /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E5A4DC5E88588485AC0B497 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		62496CE57167CEF55C8CF1D6 /* Pods-WeatherAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				23DBBA58211B25870009237E /* AppDelegate.swift */,
 				23DBBA5A211B25870009237E /* ViewController.swift */,
+				23DBBA7A211B2F970009237E /* WeatherService.swift */,
 				23DBBA5C211B25870009237E /* Main.storyboard */,
 				23DBBA5F211B25880009237E /* Assets.xcassets */,
 				23DBBA61211B25880009237E /* LaunchScreen.storyboard */,
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DBBA5B211B25870009237E /* ViewController.swift in Sources */,
+				23DBBA7B211B2F970009237E /* WeatherService.swift in Sources */,
 				23DBBA59211B25870009237E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +458,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -470,7 +477,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -487,7 +497,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -505,7 +519,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
