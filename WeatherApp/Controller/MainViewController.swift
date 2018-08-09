@@ -78,8 +78,8 @@ class MainViewController: UIViewController {
         guard let weather = weather else { return }
         
         currentConditionLabel.text = weather.currentCondition
-        temperatureLabel.text = String(weather.temperature) + " ºC"
-        windSpeedLabel.text = String(weather.windSpeed) + " mph"
+        temperatureLabel.text = String(weather.temperature.kelvinToCelsius()).celsiusUnits()
+        windSpeedLabel.text = String(weather.windSpeed).mphUnits()
         windDirectionLabel.text = weather.windDirection()
         weatherIcon.loadImageUsingCache(withUrl: weather.iconURLString())
         

@@ -8,9 +8,17 @@
 
 import Foundation
 
-
 extension String {
-    
-    
-    
+    func celsiusUnits() -> String {
+        return self + " °C"
+    }
+    func mphUnits() -> String {
+        return self + " mph"
+    }
+}
+
+extension Double {
+    func kelvinToCelsius() -> Double {
+        return self - 273.15
+    }
 }
