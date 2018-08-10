@@ -46,7 +46,6 @@ class MainViewController: UIViewController {
     }
     
     func updateWeather() {
-        
         if isLocationServicesEnabled() {
             if let coordinate = locationManager.location?.coordinate {
                 SVProgressHUD.show()
@@ -54,6 +53,7 @@ class MainViewController: UIViewController {
                 let weatherService = WeatherService()
                 weatherService.delegate = self
                 weatherService.getWeather(for: coordinate)
+                print("*** Weather Service: Update Weather")
             }
             else {
                 print("*** No Location Available")
@@ -114,7 +114,7 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("*** Location Manager: Did change Authorization")
-        updateWeather()
+        //updateWeather()
     }
  
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

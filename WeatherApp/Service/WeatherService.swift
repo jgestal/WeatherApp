@@ -39,6 +39,9 @@ class WeatherService {
             } else {
                 do {
                     let weatherJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
+                    
+                    print(weatherJSON)
+                    print("----")
                     if let weather = Weather.weatherFromJSON(json: weatherJSON) {
                         DispatchQueue.main.async {
                             self.delegate?.weatherService(self, didUpdate: weather)

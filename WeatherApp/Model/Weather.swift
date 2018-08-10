@@ -82,18 +82,18 @@ struct Weather: Codable {
     
     static func lastWeatherUpdate() -> Weather? {
         let decoder = JSONDecoder()
-        if let data = UserDefaults.standard.value(forKey: Weather.kLastWeatherUpdate) as? Data {
-            if let weather = try? decoder.decode(Weather.self, from: data) {
-                return weather.hasExpired() ? nil : weather
-            }
-        }
-        return nil
+        
+        guard
+            let data = UserDefaults.standard.value(forKey: Weather.kLastWeatherUpdate) as? Data,
+            let weather = try? decoder.decode(Weather.self, from: data)
+        else { return nil }
+        
+        return weather.hasExpired() ? nil : weather
     }
     
     static func weatherFromJSON(json: [String : AnyObject]) -> Weather? {
         
-        print(json)
-        
+        //print(json)        
         guard
             let main = json["main"] as? [String:AnyObject],
             let weather = json["weather"]?[0] as? [String:AnyObject],
