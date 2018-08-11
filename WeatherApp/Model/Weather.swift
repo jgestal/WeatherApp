@@ -93,20 +93,18 @@ struct Weather: Codable {
     
     static func weatherFromJSON(json: [String : AnyObject]) -> Weather? {
         
-        //print(json)        
         guard
             let main = json["main"] as? [String:AnyObject],
             let weather = json["weather"]?[0] as? [String:AnyObject],
             let wind = json["wind"] as? [String: AnyObject],
-            
             let temperature = main["temp"] as? Double,
             let currentCondition = weather["main"] as? String,
             let iconID = weather["icon"] as? String,
             let humidity = main["humidity"] as? Int,
             let pressure = main["pressure"] as? Int,
-            let windSpeed = wind["speed"] as? Double,
-            let windDeg = wind["deg"] as? Int
+            let windSpeed = wind["speed"] as? Double
         else { return nil }
+        let windDeg = wind["deg"] as? Int ?? 90 // Sometimes the server dont send this value
         
         let timestamp = Date.timeIntervalSinceReferenceDate
         let updatedWeather = Weather(currentCondition: currentCondition, temperature: temperature, pressure: pressure, humidity: humidity, windSpeed: windSpeed, windDeg: windDeg, iconID: iconID, timestamp: timestamp)

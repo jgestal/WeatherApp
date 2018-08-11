@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23DBBA59211B25870009237E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA58211B25870009237E /* AppDelegate.swift */; };
-		23DBBA5B211B25870009237E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA5A211B25870009237E /* MainViewController.swift */; };
+		23DBBA5B211B25870009237E /* SimpleUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA5A211B25870009237E /* SimpleUIViewController.swift */; };
 		23DBBA5E211B25870009237E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA5C211B25870009237E /* Main.storyboard */; };
 		23DBBA60211B25880009237E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA5F211B25880009237E /* Assets.xcassets */; };
 		23DBBA63211B25880009237E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA61211B25880009237E /* LaunchScreen.storyboard */; };
@@ -19,6 +19,16 @@
 		23DBBA85211B68910009237E /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA84211B68910009237E /* Units.swift */; };
 		23DBBA88211B68FA0009237E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA87211B68FA0009237E /* Weather.swift */; };
 		23DBBA8A211DCC090009237E /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA89211DCC090009237E /* StyleKit.swift */; };
+		23DBBA8C211DCD190009237E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA8B211DCD190009237E /* MainViewController.swift */; };
+		23DBBA90211DCE4A0009237E /* AnalogHumidityDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA8F211DCE4A0009237E /* AnalogHumidityDisplayView.swift */; };
+		23DBBA92211DCE7D0009237E /* AnalogCompassDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA91211DCE7D0009237E /* AnalogCompassDisplayView.swift */; };
+		23DBBA94211DCF700009237E /* AnalogTermometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA93211DCF700009237E /* AnalogTermometerView.swift */; };
+		23DBBA96211DD0AB0009237E /* WoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA95211DD0AB0009237E /* WoodView.swift */; };
+		23DBBA98211DD3CC0009237E /* DeviceFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA97211DD3CC0009237E /* DeviceFrameView.swift */; };
+		23DBBA9A211DF8340009237E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA99211DF8340009237E /* SoundManager.swift */; };
+		23DBBA9C211E63490009237E /* CustomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA9B211E63490009237E /* CustomButtonView.swift */; };
+		23DBBA9E211E65FA0009237E /* CustomTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA9D211E65FA0009237E /* CustomTouchView.swift */; };
+		23DBBAA0211E9E730009237E /* BackCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA9F211E9E730009237E /* BackCoverView.swift */; };
 		9FE4814DF86586DE8A0CD2D2 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8EDE014A7965DC9ACF7F50 /* Pods_WeatherApp.framework */; };
 		DEC59F8DAB432B07E17808E6 /* Pods_WeatherAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3C5BC096969C19F8DE6011 /* Pods_WeatherAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -36,7 +46,7 @@
 /* Begin PBXFileReference section */
 		23DBBA55211B25870009237E /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DBBA58211B25870009237E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		23DBBA5A211B25870009237E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		23DBBA5A211B25870009237E /* SimpleUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUIViewController.swift; sourceTree = "<group>"; };
 		23DBBA5D211B25870009237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23DBBA5F211B25880009237E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23DBBA62211B25880009237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +60,16 @@
 		23DBBA84211B68910009237E /* Units.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		23DBBA87211B68FA0009237E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		23DBBA89211DCC090009237E /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		23DBBA8B211DCD190009237E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		23DBBA8F211DCE4A0009237E /* AnalogHumidityDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogHumidityDisplayView.swift; sourceTree = "<group>"; };
+		23DBBA91211DCE7D0009237E /* AnalogCompassDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogCompassDisplayView.swift; sourceTree = "<group>"; };
+		23DBBA93211DCF700009237E /* AnalogTermometerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalogTermometerView.swift; sourceTree = "<group>"; };
+		23DBBA95211DD0AB0009237E /* WoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoodView.swift; sourceTree = "<group>"; };
+		23DBBA97211DD3CC0009237E /* DeviceFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFrameView.swift; sourceTree = "<group>"; };
+		23DBBA99211DF8340009237E /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		23DBBA9B211E63490009237E /* CustomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonView.swift; sourceTree = "<group>"; };
+		23DBBA9D211E65FA0009237E /* CustomTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTouchView.swift; sourceTree = "<group>"; };
+		23DBBA9F211E9E730009237E /* BackCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackCoverView.swift; sourceTree = "<group>"; };
 		297A3779156B0B2A5EB355D8 /* Pods-WeatherAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E5A4DC5E88588485AC0B497 /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		62496CE57167CEF55C8CF1D6 /* Pods-WeatherAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAppTests/Pods-WeatherAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,7 +157,8 @@
 		23DBBA81211B68530009237E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				23DBBA5A211B25870009237E /* MainViewController.swift */,
+				23DBBA5A211B25870009237E /* SimpleUIViewController.swift */,
+				23DBBA8B211DCD190009237E /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -146,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				23DBBA7A211B2F970009237E /* WeatherService.swift */,
+				23DBBA99211DF8340009237E /* SoundManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -154,6 +176,14 @@
 			isa = PBXGroup;
 			children = (
 				23DBBA7C211B612D0009237E /* WeatherInfoContainer.swift */,
+				23DBBA8F211DCE4A0009237E /* AnalogHumidityDisplayView.swift */,
+				23DBBA91211DCE7D0009237E /* AnalogCompassDisplayView.swift */,
+				23DBBA93211DCF700009237E /* AnalogTermometerView.swift */,
+				23DBBA95211DD0AB0009237E /* WoodView.swift */,
+				23DBBA97211DD3CC0009237E /* DeviceFrameView.swift */,
+				23DBBA9B211E63490009237E /* CustomButtonView.swift */,
+				23DBBA9D211E65FA0009237E /* CustomTouchView.swift */,
+				23DBBA9F211E9E730009237E /* BackCoverView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -348,13 +378,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DBBA7D211B612D0009237E /* WeatherInfoContainer.swift in Sources */,
+				23DBBA9C211E63490009237E /* CustomButtonView.swift in Sources */,
+				23DBBA9A211DF8340009237E /* SoundManager.swift in Sources */,
 				23DBBA85211B68910009237E /* Units.swift in Sources */,
 				23DBBA8A211DCC090009237E /* StyleKit.swift in Sources */,
-				23DBBA5B211B25870009237E /* MainViewController.swift in Sources */,
+				23DBBA90211DCE4A0009237E /* AnalogHumidityDisplayView.swift in Sources */,
+				23DBBA5B211B25870009237E /* SimpleUIViewController.swift in Sources */,
+				23DBBA92211DCE7D0009237E /* AnalogCompassDisplayView.swift in Sources */,
+				23DBBA98211DD3CC0009237E /* DeviceFrameView.swift in Sources */,
 				23DBBA7F211B65540009237E /* UIImageView+LoadImageFromURL.swift in Sources */,
 				23DBBA7B211B2F970009237E /* WeatherService.swift in Sources */,
+				23DBBA96211DD0AB0009237E /* WoodView.swift in Sources */,
+				23DBBA94211DCF700009237E /* AnalogTermometerView.swift in Sources */,
+				23DBBA8C211DCD190009237E /* MainViewController.swift in Sources */,
 				23DBBA59211B25870009237E /* AppDelegate.swift in Sources */,
+				23DBBAA0211E9E730009237E /* BackCoverView.swift in Sources */,
 				23DBBA88211B68FA0009237E /* Weather.swift in Sources */,
+				23DBBA9E211E65FA0009237E /* CustomTouchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
