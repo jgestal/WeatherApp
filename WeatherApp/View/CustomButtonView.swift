@@ -11,13 +11,7 @@ import UIKit
 @IBDesignable
 
 class CustomButtonView: CustomTouchView {
-    
-    override var dayTheme: Bool {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-    
+
     override func draw(_ rect: CGRect) {
         switch tag {
         case 0:
@@ -30,4 +24,5 @@ class CustomButtonView: CustomTouchView {
             break
         }
     }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { }
 }

@@ -180,12 +180,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcF-4R-Gqo" customClass="IconPatternView" customModule="WeatherApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQ4-0P-tKo" userLabel="Front" customClass="WoodView" customModule="WeatherApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14f-02-0y1" customClass="DeviceFrameView" customModule="WeatherApp" customModuleProvider="target">
                                         <rect key="frame" x="31.5" y="32" width="416" height="256"/>
                                         <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="statusLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7y-QX-eFf">
+                                                <rect key="frame" x="8" y="116.5" width="400" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electronic Weather Station" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="U31-BH-3kg">
                                                 <rect key="frame" x="64" y="32" width="289.5" height="31.5"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
@@ -226,8 +236,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="c7y-QX-eFf" firstAttribute="leading" secondItem="14f-02-0y1" secondAttribute="leading" constant="8" id="54Y-q8-Phy"/>
                                             <constraint firstItem="U31-BH-3kg" firstAttribute="centerX" secondItem="14f-02-0y1" secondAttribute="centerX" id="7VS-Ft-2Ny"/>
                                             <constraint firstItem="oZq-Vo-CQT" firstAttribute="centerX" secondItem="14f-02-0y1" secondAttribute="centerX" id="8nw-HL-LaJ"/>
+                                            <constraint firstItem="c7y-QX-eFf" firstAttribute="centerX" secondItem="14f-02-0y1" secondAttribute="centerX" id="DPx-Ld-Dge"/>
                                             <constraint firstItem="vYP-CH-Q6y" firstAttribute="leading" secondItem="6Af-2R-oYc" secondAttribute="trailing" constant="16" id="DiC-dn-jAq"/>
                                             <constraint firstItem="vYP-CH-Q6y" firstAttribute="height" secondItem="7ls-Fh-kIg" secondAttribute="height" id="Iua-Qp-Uzm"/>
                                             <constraint firstItem="vYP-CH-Q6y" firstAttribute="width" secondItem="7ls-Fh-kIg" secondAttribute="width" id="J0Q-rc-w9X"/>
@@ -237,8 +249,10 @@
                                             <constraint firstItem="mZE-f9-s4n" firstAttribute="width" secondItem="oZq-Vo-CQT" secondAttribute="width" id="P2E-f0-6YE"/>
                                             <constraint firstItem="7ls-Fh-kIg" firstAttribute="top" secondItem="U31-BH-3kg" secondAttribute="bottom" constant="11.666666666666671" id="QFH-Ct-cCL"/>
                                             <constraint firstItem="M0D-pU-yGK" firstAttribute="height" secondItem="oZq-Vo-CQT" secondAttribute="height" id="QMe-0h-w1Z"/>
+                                            <constraint firstAttribute="trailing" secondItem="c7y-QX-eFf" secondAttribute="trailing" constant="8" id="RnX-Ii-CoW"/>
                                             <constraint firstItem="M0D-pU-yGK" firstAttribute="centerY" secondItem="oZq-Vo-CQT" secondAttribute="centerY" id="Um5-zE-Wpo"/>
                                             <constraint firstItem="6Af-2R-oYc" firstAttribute="leading" secondItem="7ls-Fh-kIg" secondAttribute="trailing" constant="16" id="Vh5-gZ-ox2"/>
+                                            <constraint firstItem="c7y-QX-eFf" firstAttribute="centerY" secondItem="14f-02-0y1" secondAttribute="centerY" id="Y9O-TK-rIQ"/>
                                             <constraint firstItem="mZE-f9-s4n" firstAttribute="centerY" secondItem="oZq-Vo-CQT" secondAttribute="centerY" id="YKu-ON-6Fy"/>
                                             <constraint firstItem="7ls-Fh-kIg" firstAttribute="leading" secondItem="14f-02-0y1" secondAttribute="leading" constant="23" id="cZE-nW-S3F"/>
                                             <constraint firstItem="U31-BH-3kg" firstAttribute="top" secondItem="14f-02-0y1" secondAttribute="top" constant="32" id="dac-qz-iiX"/>
@@ -282,12 +296,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="K1M-n2-ltj" firstAttribute="top" secondItem="0eW-od-KMC" secondAttribute="top" id="1bZ-KA-2TN"/>
+                            <constraint firstItem="0eW-od-KMC" firstAttribute="trailing" secondItem="zcF-4R-Gqo" secondAttribute="trailing" id="5gd-y7-fum"/>
                             <constraint firstItem="K1M-n2-ltj" firstAttribute="trailing" secondItem="0eW-od-KMC" secondAttribute="trailing" id="80g-hx-hHF"/>
+                            <constraint firstItem="0eW-od-KMC" firstAttribute="bottom" secondItem="zcF-4R-Gqo" secondAttribute="bottom" id="B2p-eq-TjA"/>
                             <constraint firstItem="eQ4-0P-tKo" firstAttribute="bottom" secondItem="0eW-od-KMC" secondAttribute="bottom" id="BVv-ic-ITB"/>
                             <constraint firstItem="eQ4-0P-tKo" firstAttribute="top" secondItem="0eW-od-KMC" secondAttribute="top" id="HOD-Rc-CSs"/>
+                            <constraint firstItem="zcF-4R-Gqo" firstAttribute="leading" secondItem="0eW-od-KMC" secondAttribute="leading" id="Hj5-8C-3Mx"/>
                             <constraint firstItem="eQ4-0P-tKo" firstAttribute="leading" secondItem="0eW-od-KMC" secondAttribute="leading" id="Sq5-6b-DFv"/>
                             <constraint firstItem="eQ4-0P-tKo" firstAttribute="trailing" secondItem="0eW-od-KMC" secondAttribute="trailing" id="XhY-kZ-Toe"/>
                             <constraint firstItem="K1M-n2-ltj" firstAttribute="bottom" secondItem="0eW-od-KMC" secondAttribute="bottom" id="XzI-3e-8FK"/>
+                            <constraint firstItem="zcF-4R-Gqo" firstAttribute="top" secondItem="0eW-od-KMC" secondAttribute="top" id="c8i-SR-Zg7"/>
                             <constraint firstItem="K1M-n2-ltj" firstAttribute="leading" secondItem="0eW-od-KMC" secondAttribute="leading" id="dhX-zw-Cyo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0eW-od-KMC"/>
@@ -300,6 +318,7 @@
                         <outlet property="humidityDisplay" destination="vYP-CH-Q6y" id="Xi0-sY-5Yn"/>
                         <outlet property="nightModeButtonView" destination="oZq-Vo-CQT" id="f1D-bQ-33H"/>
                         <outlet property="refreshButtonView" destination="M0D-pU-yGK" id="Zmf-QU-fSP"/>
+                        <outlet property="statusLabel" destination="c7y-QX-eFf" id="zQU-Ks-HMn"/>
                         <outlet property="termometer" destination="6Af-2R-oYc" id="ymd-CF-IlF"/>
                         <outlet property="titleLabel" destination="U31-BH-3kg" id="qj5-l0-sNK"/>
                         <outlet property="windCompassDisplay" destination="7ls-Fh-kIg" id="dvs-OI-Rhi"/>

@@ -29,7 +29,7 @@ public class StyleKit : NSObject {
 
     //// Drawing Methods
 
-    @objc dynamic public class func drawCompassDisplay(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, compassAngle: CGFloat = -25, compassVelocityText: String = "8 mph", dayTheme: Bool = true) {
+    @objc dynamic public class func drawCompassDisplay(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, compassAngle: CGFloat = -25, compassVelocityText: String = "8 mph", dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -42,14 +42,16 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let iconColor1 = UIColor(red: 0.697, green: 0.721, blue: 0.734, alpha: 1.000)
+        let iconColor2 = UIColor(red: 0.220, green: 0.548, blue: 0.818, alpha: 1.000)
         let darkTextColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let mediumTextColor1 = UIColor(red: 0.465, green: 0.510, blue: 0.514, alpha: 1.000)
         let lightTextColor1 = UIColor(red: 0.543, green: 0.600, blue: 0.605, alpha: 1.000)
         let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereCenterColor1 = UIColor(red: 0.782, green: 0.716, blue: 0.527, alpha: 1.000)
-        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
-        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let darkTextColor2 = UIColor(red: 0.922, green: 0.754, blue: 0.000, alpha: 1.000)
         let mediumTextColor2 = UIColor(red: 0.843, green: 0.843, blue: 0.843, alpha: 1.000)
         let lightTextColor2 = UIColor(red: 0.180, green: 0.454, blue: 0.687, alpha: 1.000)
@@ -60,6 +62,7 @@ public class StyleKit : NSObject {
         let compassDisplayAngle: CGFloat = compassAngle - 90
         let sphereColor = dayTheme ? sphereColor1 : sphereColor2
         let indicatorColor = dayTheme ? indicatorColor1 : indicatorColor2
+        let iconColor = dayTheme ? iconColor1 : iconColor2
         let darkTextColor = dayTheme ? darkTextColor1 : darkTextColor2
         let mediumTextColor = dayTheme ? mediumTextColor1 : mediumTextColor2
         let lightTextColor = dayTheme ? lightTextColor1 : lightTextColor2
@@ -124,16 +127,6 @@ public class StyleKit : NSObject {
         let oval2Path = UIBezierPath(ovalIn: CGRect(x: 20, y: 20, width: 280, height: 280))
         sphereBackgroundColor.setFill()
         oval2Path.fill()
-
-
-        //// Symbol Drawing
-        let symbolRect = CGRect(x: 122, y: 68, width: 76, height: 76)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        StyleKit.drawWindIcon(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, dayTheme: true)
-        context.restoreGState()
 
 
         //// Text Drawing
@@ -205,22 +198,6 @@ public class StyleKit : NSObject {
         context.saveGState()
         context.clip(to: text4Rect)
         text4TextContent.draw(in: CGRect(x: text4Rect.minX, y: text4Rect.minY + (text4Rect.height - text4TextHeight) / 2, width: text4Rect.width, height: text4TextHeight), withAttributes: text4FontAttributes)
-        context.restoreGState()
-
-
-        //// Polygon Drawing
-        context.saveGState()
-        context.translateBy(x: 160, y: 160)
-        context.rotate(by: -compassDisplayAngle * CGFloat.pi/180)
-
-        let polygonPath = UIBezierPath()
-        polygonPath.move(to: CGPoint(x: -0, y: -98.22))
-        polygonPath.addLine(to: CGPoint(x: 11.26, y: 49.11))
-        polygonPath.addLine(to: CGPoint(x: -11.26, y: 49.11))
-        polygonPath.close()
-        indicatorColor.setFill()
-        polygonPath.fill()
-
         context.restoreGState()
 
 
@@ -296,6 +273,80 @@ public class StyleKit : NSObject {
         context.restoreGState()
 
 
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 188.2, y: 77.2))
+        bezierPath.addCurve(to: CGPoint(x: 179.2, y: 81.1), controlPoint1: CGPoint(x: 184.8, y: 77.2), controlPoint2: CGPoint(x: 181.5, y: 78.6))
+        bezierPath.addCurve(to: CGPoint(x: 179.4, y: 86.8), controlPoint1: CGPoint(x: 177.7, y: 82.7), controlPoint2: CGPoint(x: 177.8, y: 85.2))
+        bezierPath.addCurve(to: CGPoint(x: 185.1, y: 86.6), controlPoint1: CGPoint(x: 181, y: 88.3), controlPoint2: CGPoint(x: 183.5, y: 88.2))
+        bezierPath.addCurve(to: CGPoint(x: 188.2, y: 85.2), controlPoint1: CGPoint(x: 185.9, y: 85.7), controlPoint2: CGPoint(x: 187, y: 85.2))
+        bezierPath.addCurve(to: CGPoint(x: 192.5, y: 89.5), controlPoint1: CGPoint(x: 190.6, y: 85.2), controlPoint2: CGPoint(x: 192.5, y: 87.1))
+        bezierPath.addCurve(to: CGPoint(x: 188.2, y: 93.8), controlPoint1: CGPoint(x: 192.5, y: 91.9), controlPoint2: CGPoint(x: 190.6, y: 93.8))
+        bezierPath.addLine(to: CGPoint(x: 124.5, y: 93.8))
+        bezierPath.addCurve(to: CGPoint(x: 120.5, y: 97.8), controlPoint1: CGPoint(x: 122.3, y: 93.8), controlPoint2: CGPoint(x: 120.5, y: 95.6))
+        bezierPath.addCurve(to: CGPoint(x: 124.5, y: 101.8), controlPoint1: CGPoint(x: 120.5, y: 100), controlPoint2: CGPoint(x: 122.3, y: 101.8))
+        bezierPath.addLine(to: CGPoint(x: 188.2, y: 101.8))
+        bezierPath.addCurve(to: CGPoint(x: 200.5, y: 89.5), controlPoint1: CGPoint(x: 195, y: 101.8), controlPoint2: CGPoint(x: 200.5, y: 96.3))
+        bezierPath.addCurve(to: CGPoint(x: 188.2, y: 77.2), controlPoint1: CGPoint(x: 200.5, y: 82.7), controlPoint2: CGPoint(x: 195, y: 77.2))
+        bezierPath.close()
+        iconColor.setFill()
+        bezierPath.fill()
+
+
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.move(to: CGPoint(x: 170, y: 107.2))
+        bezier2Path.addLine(to: CGPoint(x: 124.5, y: 107.2))
+        bezier2Path.addCurve(to: CGPoint(x: 120.5, y: 111.2), controlPoint1: CGPoint(x: 122.3, y: 107.2), controlPoint2: CGPoint(x: 120.5, y: 109))
+        bezier2Path.addCurve(to: CGPoint(x: 124.5, y: 115.2), controlPoint1: CGPoint(x: 120.5, y: 113.4), controlPoint2: CGPoint(x: 122.3, y: 115.2))
+        bezier2Path.addLine(to: CGPoint(x: 170, y: 115.2))
+        bezier2Path.addCurve(to: CGPoint(x: 174.3, y: 119.5), controlPoint1: CGPoint(x: 172.4, y: 115.2), controlPoint2: CGPoint(x: 174.3, y: 117.1))
+        bezier2Path.addCurve(to: CGPoint(x: 170, y: 123.8), controlPoint1: CGPoint(x: 174.3, y: 121.9), controlPoint2: CGPoint(x: 172.4, y: 123.8))
+        bezier2Path.addCurve(to: CGPoint(x: 166.9, y: 122.4), controlPoint1: CGPoint(x: 168.8, y: 123.8), controlPoint2: CGPoint(x: 167.7, y: 123.3))
+        bezier2Path.addCurve(to: CGPoint(x: 161.2, y: 122.2), controlPoint1: CGPoint(x: 165.4, y: 120.8), controlPoint2: CGPoint(x: 162.9, y: 120.7))
+        bezier2Path.addCurve(to: CGPoint(x: 161, y: 127.9), controlPoint1: CGPoint(x: 159.6, y: 123.7), controlPoint2: CGPoint(x: 159.5, y: 126.2))
+        bezier2Path.addCurve(to: CGPoint(x: 170, y: 131.8), controlPoint1: CGPoint(x: 163.3, y: 130.4), controlPoint2: CGPoint(x: 166.6, y: 131.8))
+        bezier2Path.addCurve(to: CGPoint(x: 182.3, y: 119.5), controlPoint1: CGPoint(x: 176.8, y: 131.8), controlPoint2: CGPoint(x: 182.3, y: 126.3))
+        bezier2Path.addCurve(to: CGPoint(x: 170, y: 107.2), controlPoint1: CGPoint(x: 182.2, y: 112.7), controlPoint2: CGPoint(x: 176.7, y: 107.2))
+        bezier2Path.close()
+        iconColor.setFill()
+        bezier2Path.fill()
+
+
+        //// Text 5 Drawing
+        let text5Rect = CGRect(x: 0, y: 220, width: 320, height: 32)
+        let text5Style = NSMutableParagraphStyle()
+        text5Style.alignment = .center
+        let text5FontAttributes = [
+            .font: UIFont(name: "Futura-Medium", size: 24)!,
+            .foregroundColor: darkTextColor,
+            .paragraphStyle: text5Style,
+        ] as [NSAttributedStringKey: Any]
+
+        let text5TextHeight: CGFloat = compassVelocityText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text5Rect)
+        compassVelocityText.draw(in: CGRect(x: text5Rect.minX, y: text5Rect.minY + (text5Rect.height - text5TextHeight) / 2, width: text5Rect.width, height: text5TextHeight), withAttributes: text5FontAttributes)
+        context.restoreGState()
+
+
+        //// Group 2
+        //// Polygon Drawing
+        context.saveGState()
+        context.translateBy(x: 160, y: 160)
+        context.rotate(by: -compassDisplayAngle * CGFloat.pi/180)
+
+        let polygonPath = UIBezierPath()
+        polygonPath.move(to: CGPoint(x: -0, y: -98.22))
+        polygonPath.addLine(to: CGPoint(x: 11.26, y: 49.11))
+        polygonPath.addLine(to: CGPoint(x: -11.26, y: 49.11))
+        polygonPath.close()
+        indicatorColor.setFill()
+        polygonPath.fill()
+
+        context.restoreGState()
+
+
         //// Oval 3 Drawing
         let oval3Rect = CGRect(x: 144, y: 144, width: 32, height: 32)
         let oval3Path = UIBezierPath(ovalIn: oval3Rect)
@@ -316,29 +367,12 @@ public class StyleKit : NSObject {
         let oval4Path = UIBezierPath(ovalIn: CGRect(x: 152, y: 152, width: 16, height: 16))
         sphereCenterColor.setFill()
         oval4Path.fill()
-
-
-        //// Text 5 Drawing
-        let text5Rect = CGRect(x: 0, y: 220, width: 320, height: 32)
-        let text5Style = NSMutableParagraphStyle()
-        text5Style.alignment = .center
-        let text5FontAttributes = [
-            .font: UIFont(name: "Futura-Medium", size: 24)!,
-            .foregroundColor: darkTextColor,
-            .paragraphStyle: text5Style,
-        ] as [NSAttributedStringKey: Any]
-
-        let text5TextHeight: CGFloat = compassVelocityText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: text5Rect)
-        compassVelocityText.draw(in: CGRect(x: text5Rect.minX, y: text5Rect.minY + (text5Rect.height - text5TextHeight) / 2, width: text5Rect.width, height: text5TextHeight), withAttributes: text5FontAttributes)
-        context.restoreGState()
         
         context.restoreGState()
 
     }
 
-    @objc dynamic public class func drawTermometer(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 160, height: 320), resizing: ResizingBehavior = .aspectFit, termometerDegrees: CGFloat = 57, dayTheme: Bool = true) {
+    @objc dynamic public class func drawTermometer(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 160, height: 320), resizing: ResizingBehavior = .aspectFit, termometerDegrees: CGFloat = 57, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -351,12 +385,12 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let mediumTextColor1 = UIColor(red: 0.465, green: 0.510, blue: 0.514, alpha: 1.000)
+        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let lightTextColor1 = UIColor(red: 0.543, green: 0.600, blue: 0.605, alpha: 1.000)
         let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let termometerColor1 = UIColor(red: 0.469, green: 0.514, blue: 0.518, alpha: 1.000)
         let termometerIndicator1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
-        let mediumTextColor2 = UIColor(red: 0.843, green: 0.843, blue: 0.843, alpha: 1.000)
+        let lightTextColor2 = UIColor(red: 0.180, green: 0.454, blue: 0.687, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
         let termometerColor2 = UIColor(red: 0.465, green: 0.510, blue: 0.514, alpha: 1.000)
         let termometerIndicator2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
@@ -370,7 +404,7 @@ public class StyleKit : NSObject {
         let termometerDisplayYScale: CGFloat = termometerDegrees * 0.02 < 0 ? 0 : (termometerDegrees * 0.02 > 1 ? 1 : termometerDegrees * 0.02)
         let termometerTemperatureColor = termometerDegrees < 10 ? termometer0 : (termometerDegrees < 20 ? termometer10 : (termometerDegrees < 30 ? termometer20 : (termometerDegrees < 40 ? termometer30 : termometer40)))
         let sphereColor = dayTheme ? sphereColor1 : sphereColor2
-        let mediumTextColor = dayTheme ? mediumTextColor1 : mediumTextColor2
+        let lightTextColor = dayTheme ? lightTextColor1 : lightTextColor2
         let sphereBackgroundColor = dayTheme ? sphereBackgroundColor1 : sphereBackgroundColor2
         let termometerColor = dayTheme ? termometerColor1 : termometerColor2
         let termometerIndicator = dayTheme ? termometerIndicator1 : termometerIndicator2
@@ -453,7 +487,7 @@ public class StyleKit : NSObject {
         text4Style.alignment = .right
         let text4FontAttributes = [
             .font: UIFont(name: "Futura-Medium", size: 16)!,
-            .foregroundColor: mediumTextColor,
+            .foregroundColor: lightTextColor,
             .paragraphStyle: text4Style,
         ] as [NSAttributedStringKey: Any]
 
@@ -471,7 +505,7 @@ public class StyleKit : NSObject {
         textStyle.alignment = .right
         let textFontAttributes = [
             .font: UIFont(name: "Futura-Medium", size: 16)!,
-            .foregroundColor: mediumTextColor,
+            .foregroundColor: lightTextColor,
             .paragraphStyle: textStyle,
         ] as [NSAttributedStringKey: Any]
 
@@ -489,7 +523,7 @@ public class StyleKit : NSObject {
         text2Style.alignment = .right
         let text2FontAttributes = [
             .font: UIFont(name: "Futura-Medium", size: 16)!,
-            .foregroundColor: mediumTextColor,
+            .foregroundColor: lightTextColor,
             .paragraphStyle: text2Style,
         ] as [NSAttributedStringKey: Any]
 
@@ -507,7 +541,7 @@ public class StyleKit : NSObject {
         text3Style.alignment = .right
         let text3FontAttributes = [
             .font: UIFont(name: "Futura-Medium", size: 16)!,
-            .foregroundColor: mediumTextColor,
+            .foregroundColor: lightTextColor,
             .paragraphStyle: text3Style,
         ] as [NSAttributedStringKey: Any]
 
@@ -619,7 +653,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawHumidityDisplay(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, humidity: CGFloat = 0, dayTheme: Bool = true) {
+    @objc dynamic public class func drawHumidityDisplay(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, humidity: CGFloat = 0, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -632,14 +666,16 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let iconColor1 = UIColor(red: 0.697, green: 0.721, blue: 0.734, alpha: 1.000)
+        let iconColor2 = UIColor(red: 0.220, green: 0.548, blue: 0.818, alpha: 1.000)
         let darkTextColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let mediumTextColor1 = UIColor(red: 0.465, green: 0.510, blue: 0.514, alpha: 1.000)
         let lightTextColor1 = UIColor(red: 0.543, green: 0.600, blue: 0.605, alpha: 1.000)
         let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereCenterColor1 = UIColor(red: 0.782, green: 0.716, blue: 0.527, alpha: 1.000)
-        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
-        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let darkTextColor2 = UIColor(red: 0.922, green: 0.754, blue: 0.000, alpha: 1.000)
         let mediumTextColor2 = UIColor(red: 0.843, green: 0.843, blue: 0.843, alpha: 1.000)
         let lightTextColor2 = UIColor(red: 0.180, green: 0.454, blue: 0.687, alpha: 1.000)
@@ -651,6 +687,7 @@ public class StyleKit : NSObject {
         let humidityDisplayText = "\(Int(round(humidity * 100)))" + " %"
         let sphereColor = dayTheme ? sphereColor1 : sphereColor2
         let indicatorColor = dayTheme ? indicatorColor1 : indicatorColor2
+        let iconColor = dayTheme ? iconColor1 : iconColor2
         let darkTextColor = dayTheme ? darkTextColor1 : darkTextColor2
         let mediumTextColor = dayTheme ? mediumTextColor1 : mediumTextColor2
         let lightTextColor = dayTheme ? lightTextColor1 : lightTextColor2
@@ -717,16 +754,6 @@ public class StyleKit : NSObject {
         oval2Path.fill()
 
 
-        //// Symbol Drawing
-        let symbolRect = CGRect(x: 122, y: 68, width: 76, height: 76)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        StyleKit.drawHumidityIcon(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, dayTheme: true)
-        context.restoreGState()
-
-
         //// Text Drawing
         let textRect = CGRect(x: 140, y: 20, width: 40, height: 48)
         let textTextContent = "50"
@@ -781,22 +808,6 @@ public class StyleKit : NSObject {
         context.restoreGState()
 
 
-        //// Polygon Drawing
-        context.saveGState()
-        context.translateBy(x: 160, y: 160)
-        context.rotate(by: -humidityDisplayAngle * CGFloat.pi/180)
-
-        let polygonPath = UIBezierPath()
-        polygonPath.move(to: CGPoint(x: -0, y: -98.22))
-        polygonPath.addLine(to: CGPoint(x: 11.26, y: 49.11))
-        polygonPath.addLine(to: CGPoint(x: -11.26, y: 49.11))
-        polygonPath.close()
-        indicatorColor.setFill()
-        polygonPath.fill()
-
-        context.restoreGState()
-
-
         //// NE Drawing
         let nERect = CGRect(x: 60, y: 53, width: 40, height: 48)
         let nETextContent = "25"
@@ -833,6 +844,87 @@ public class StyleKit : NSObject {
         context.restoreGState()
 
 
+        //// Group 2
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 164.4, y: 108.2))
+        bezierPath.addCurve(to: CGPoint(x: 162, y: 109.4), controlPoint1: CGPoint(x: 163.5, y: 108.2), controlPoint2: CGPoint(x: 162.6, y: 108.6))
+        bezierPath.addCurve(to: CGPoint(x: 154.6, y: 125.1), controlPoint1: CGPoint(x: 160.8, y: 111), controlPoint2: CGPoint(x: 154.6, y: 119.5))
+        bezierPath.addCurve(to: CGPoint(x: 164.4, y: 135.6), controlPoint1: CGPoint(x: 154.6, y: 131.7), controlPoint2: CGPoint(x: 159.6, y: 135.6))
+        bezierPath.addLine(to: CGPoint(x: 164.4, y: 135.6))
+        bezierPath.addCurve(to: CGPoint(x: 174.2, y: 125.1), controlPoint1: CGPoint(x: 169.2, y: 135.6), controlPoint2: CGPoint(x: 174.2, y: 131.7))
+        bezierPath.addCurve(to: CGPoint(x: 170.4, y: 114.8), controlPoint1: CGPoint(x: 174.2, y: 122.5), controlPoint2: CGPoint(x: 172.9, y: 119.1))
+        bezierPath.addCurve(to: CGPoint(x: 164.4, y: 108.2), controlPoint1: CGPoint(x: 167.7, y: 110.1), controlPoint2: CGPoint(x: 166.5, y: 108.2))
+        bezierPath.close()
+        iconColor.setFill()
+        bezierPath.fill()
+
+
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.move(to: CGPoint(x: 150, y: 88.2))
+        bezier2Path.addCurve(to: CGPoint(x: 147.6, y: 87), controlPoint1: CGPoint(x: 149.4, y: 87.5), controlPoint2: CGPoint(x: 148.5, y: 87))
+        bezier2Path.addCurve(to: CGPoint(x: 145.2, y: 88.2), controlPoint1: CGPoint(x: 146.7, y: 87), controlPoint2: CGPoint(x: 145.8, y: 87.4))
+        bezier2Path.addCurve(to: CGPoint(x: 140, y: 99.3), controlPoint1: CGPoint(x: 144, y: 89.8), controlPoint2: CGPoint(x: 140, y: 95.3))
+        bezier2Path.addCurve(to: CGPoint(x: 147.6, y: 107.3), controlPoint1: CGPoint(x: 140, y: 104.3), controlPoint2: CGPoint(x: 143.8, y: 107.3))
+        bezier2Path.addCurve(to: CGPoint(x: 155.2, y: 99.3), controlPoint1: CGPoint(x: 151.4, y: 107.3), controlPoint2: CGPoint(x: 155.2, y: 104.3))
+        bezier2Path.addCurve(to: CGPoint(x: 150, y: 88.2), controlPoint1: CGPoint(x: 155.2, y: 95.3), controlPoint2: CGPoint(x: 151.2, y: 89.8))
+        bezier2Path.close()
+        iconColor.setFill()
+        bezier2Path.fill()
+
+
+        //// Bezier 3 Drawing
+        let bezier3Path = UIBezierPath()
+        bezier3Path.move(to: CGPoint(x: 179.2, y: 82.7))
+        bezier3Path.addCurve(to: CGPoint(x: 175.2, y: 79.1), controlPoint1: CGPoint(x: 177.9, y: 80.5), controlPoint2: CGPoint(x: 177.1, y: 79.1))
+        bezier3Path.addCurve(to: CGPoint(x: 172.8, y: 80.3), controlPoint1: CGPoint(x: 174.3, y: 79.1), controlPoint2: CGPoint(x: 173.4, y: 79.5))
+        bezier3Path.addCurve(to: CGPoint(x: 169.3, y: 87.9), controlPoint1: CGPoint(x: 171.8, y: 81.7), controlPoint2: CGPoint(x: 169.3, y: 85.2))
+        bezier3Path.addCurve(to: CGPoint(x: 175.1, y: 94), controlPoint1: CGPoint(x: 169.3, y: 91.7), controlPoint2: CGPoint(x: 172.3, y: 94))
+        bezier3Path.addLine(to: CGPoint(x: 175.1, y: 94))
+        bezier3Path.addCurve(to: CGPoint(x: 180.9, y: 87.9), controlPoint1: CGPoint(x: 178, y: 94), controlPoint2: CGPoint(x: 180.9, y: 91.7))
+        bezier3Path.addCurve(to: CGPoint(x: 179.2, y: 82.7), controlPoint1: CGPoint(x: 181, y: 86.5), controlPoint2: CGPoint(x: 180.4, y: 84.8))
+        bezier3Path.close()
+        iconColor.setFill()
+        bezier3Path.fill()
+
+
+
+
+        //// Text 5 Drawing
+        let text5Rect = CGRect(x: 0, y: 220, width: 320, height: 32)
+        let text5Style = NSMutableParagraphStyle()
+        text5Style.alignment = .center
+        let text5FontAttributes = [
+            .font: UIFont(name: "Futura-Medium", size: 24)!,
+            .foregroundColor: darkTextColor,
+            .paragraphStyle: text5Style,
+        ] as [NSAttributedStringKey: Any]
+
+        let text5TextHeight: CGFloat = humidityDisplayText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: text5Rect)
+        humidityDisplayText.draw(in: CGRect(x: text5Rect.minX, y: text5Rect.minY + (text5Rect.height - text5TextHeight) / 2, width: text5Rect.width, height: text5TextHeight), withAttributes: text5FontAttributes)
+        context.restoreGState()
+
+
+        //// Group 3
+        //// Polygon Drawing
+        context.saveGState()
+        context.translateBy(x: 160, y: 160)
+        context.rotate(by: -(humidityDisplayAngle - 80.8057345906) * CGFloat.pi/180)
+
+        let polygonPath = UIBezierPath()
+        polygonPath.move(to: CGPoint(x: -0, y: -98.22))
+        polygonPath.addLine(to: CGPoint(x: 11.26, y: 49.11))
+        polygonPath.addLine(to: CGPoint(x: -11.26, y: 49.11))
+        polygonPath.close()
+        indicatorColor.setFill()
+        polygonPath.fill()
+
+        context.restoreGState()
+
+
         //// Oval 3 Drawing
         let oval3Rect = CGRect(x: 144, y: 144, width: 32, height: 32)
         let oval3Path = UIBezierPath(ovalIn: oval3Rect)
@@ -853,29 +945,12 @@ public class StyleKit : NSObject {
         let oval4Path = UIBezierPath(ovalIn: CGRect(x: 152, y: 152, width: 16, height: 16))
         sphereCenterColor.setFill()
         oval4Path.fill()
-
-
-        //// Text 5 Drawing
-        let text5Rect = CGRect(x: 0, y: 220, width: 320, height: 32)
-        let text5Style = NSMutableParagraphStyle()
-        text5Style.alignment = .center
-        let text5FontAttributes = [
-            .font: UIFont(name: "Futura-Medium", size: 24)!,
-            .foregroundColor: darkTextColor,
-            .paragraphStyle: text5Style,
-        ] as [NSAttributedStringKey: Any]
-
-        let text5TextHeight: CGFloat = humidityDisplayText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: text5Rect)
-        humidityDisplayText.draw(in: CGRect(x: text5Rect.minX, y: text5Rect.minY + (text5Rect.height - text5TextHeight) / 2, width: text5Rect.width, height: text5TextHeight), withAttributes: text5FontAttributes)
-        context.restoreGState()
         
         context.restoreGState()
 
     }
 
-    @objc dynamic public class func drawClock(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, hours: CGFloat = 5, minutes: CGFloat = 12, isSunset: Bool = true, dayTheme: Bool = true) {
+    @objc dynamic public class func drawClock(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), resizing: ResizingBehavior = .aspectFit, hours: CGFloat = 5, minutes: CGFloat = 12, isSunset: Bool = true, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -888,13 +963,13 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
+        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let darkTextColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let mediumTextColor1 = UIColor(red: 0.465, green: 0.510, blue: 0.514, alpha: 1.000)
         let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereCenterColor1 = UIColor(red: 0.782, green: 0.716, blue: 0.527, alpha: 1.000)
-        let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
-        let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
         let darkTextColor2 = UIColor(red: 0.922, green: 0.754, blue: 0.000, alpha: 1.000)
         let mediumTextColor2 = UIColor(red: 0.843, green: 0.843, blue: 0.843, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
@@ -1223,7 +1298,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawHumidityIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawHumidityIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1289,7 +1364,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawWindIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawWindIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1350,7 +1425,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawSunsetIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawSunsetIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1486,7 +1561,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawSunriseIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawSunriseIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1616,7 +1691,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawDeviceFrame(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), dayTheme: Bool = true) {
+    @objc dynamic public class func drawDeviceFrame(frame: CGRect = CGRect(x: 0, y: 0, width: 320, height: 320), dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
 
@@ -1683,7 +1758,7 @@ public class StyleKit : NSObject {
         context.restoreGState()
     }
 
-    @objc dynamic public class func drawBaseButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawBaseButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1696,8 +1771,8 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
 
         //// Variable Declarations
@@ -1716,7 +1791,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawRefreshIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawRefreshIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1804,7 +1879,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawMoon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawMoon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1854,7 +1929,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawSmileIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawSmileIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1969,7 +2044,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawNightModeButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawNightModeButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1982,10 +2057,10 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
 
         //// Variable Declarations
@@ -2034,7 +2109,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawRefreshButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawRefreshButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -2047,10 +2122,10 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
 
         //// Variable Declarations
@@ -2137,7 +2212,7 @@ public class StyleKit : NSObject {
 
     }
 
-    @objc dynamic public class func drawCreditsButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = true) {
+    @objc dynamic public class func drawCreditsButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 151, height: 152), resizing: ResizingBehavior = .aspectFit, dayTheme: Bool = false) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -2150,10 +2225,10 @@ public class StyleKit : NSObject {
 
         //// Color Declarations
         let sphereColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
-        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let indicatorColor1 = UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1.000)
         let indicatorColor2 = UIColor(red: 0.858, green: 0.875, blue: 0.879, alpha: 1.000)
+        let sphereBackgroundColor1 = UIColor(red: 0.854, green: 0.871, blue: 0.875, alpha: 1.000)
         let sphereBackgroundColor2 = UIColor(red: 0.161, green: 0.161, blue: 0.161, alpha: 1.000)
 
         //// Variable Declarations

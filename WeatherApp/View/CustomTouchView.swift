@@ -19,8 +19,14 @@ class CustomTouchView: UIView {
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dayTheme = !dayTheme
+        print("*** Touches Began")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         dayTheme = !dayTheme
+        print("*** Touches Ended")
+    }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dayTheme = !dayTheme
+        print("*** Touches Cancelled")
     }
 }

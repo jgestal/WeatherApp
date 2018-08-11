@@ -29,9 +29,7 @@ class MainViewController: UIViewController {
     }
     
     var retrieveWeatherWhenLocationComesAvailable = false
-    
     @IBOutlet weak var deviceFrameView: DeviceFrameView!
-    
     @IBOutlet weak var humidityDisplay: AnalogHumidityDisplayView!
     @IBOutlet weak var termometer: AnalogTermometerView!
     @IBOutlet weak var windCompassDisplay: AnalogCompassDisplayView!
@@ -42,24 +40,19 @@ class MainViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
-    
     @IBOutlet weak var frontView: WoodView!
     @IBOutlet weak var backView: WoodView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearUI()
         setupLocationManager()
         updateWeather()
-     //   weatherInfoContainer.isHidden = true
         self.title = "Weather App"
-        
         humidityDisplay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(humidityDisplayTapped)))
         termometer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(termometerTapped)))
         windCompassDisplay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(windCompassDisplayTapped)))
         backView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backViewTapped)))
-        
         [refreshButtonView,nightModeButtonView,creditsButtonView].forEach {
             $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(customButtonTapped)))
         }
@@ -67,10 +60,11 @@ class MainViewController: UIViewController {
     
     
     func updateWeather() {
+        weather = nil
         if isLocationServicesEnabled() {
             if let coordinate = locationManager.location?.coordinate {
                 SVProgressHUD.show()
-                //statusLabel.text = ""
+                statusLabel.text = ""
                 let weatherService = WeatherService()
                 weatherService.delegate = self
                 weatherService.getWeather(for: coordinate)
@@ -78,11 +72,12 @@ class MainViewController: UIViewController {
             }
             else {
                 print("*** No Location Available")
-                //statusLabel.text = "Waiting for user location..."
+                statusLabel.text = "Waiting for user location..."
                 retrieveWeatherWhenLocationComesAvailable = true
             }
         } else {
-            statusLabel.text = "The app needs access to user location to work."
+            retrieveWeatherWhenLocationComesAvailable = true 
+            statusLabel.text = "The app needs access to the user location to work."
         }
     }
     
@@ -90,28 +85,23 @@ class MainViewController: UIViewController {
         [windCompassDisplay,termometer,humidityDisplay].forEach {
             $0.clear()
         }
-        
-        //currentConditionLabel.text = ""
-        //temperatureLabel.text = ""
-        //windSpeedLabel.text = ""
-        //windDirectionLabel.text = ""
-        //statusLabel.text = ""
-        //weatherIcon.image = nil
+        statusLabel.text = ""
     }
     
     func updateUI() {
-        guard let weather = weather else { return }
         print("*** Update UI")
-
+        if let weather = weather {
+            [humidityDisplay,termometer,windCompassDisplay].forEach { $0.fadeIn() }
+             windCompassDisplay.update(angle: Double(weather.windDeg), velocityText: String(weather.windSpeed).mphUnits())
+            termometer.update(degrees: weather.temperature.kelvinToCelsius())
+            humidityDisplay.update(humidity: Double(weather.humidity) / 100)
+        } else {
+            [humidityDisplay,termometer,windCompassDisplay].forEach { $0.fadeOut() }
+        }
         let theme = dayTheme
         [windCompassDisplay,termometer,humidityDisplay,refreshButtonView,nightModeButtonView,creditsButtonView].forEach { $0.dayTheme = theme }
-        titleLabel.textColor = theme ? StyleKit.flatBlackLight : StyleKit.flatWhiteLight
+        [titleLabel,statusLabel].forEach { $0?.textColor = theme ? StyleKit.flatBlackLight : StyleKit.flatWhiteLight }
         deviceFrameView.dayTheme = theme
-        windCompassDisplay.update(angle: Double(weather.windDeg), velocityText: String(weather.windSpeed).mphUnits())
-        termometer.update(degrees: weather.temperature.kelvinToCelsius())
-        humidityDisplay.update(humidity: Double(weather.humidity) / 100)
-        
-        //statusLabel.text = "Last update: \(weather.dateString())"
     }
 }
 
@@ -142,7 +132,10 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("*** Location Manager: Did change Authorization")
-        //updateWeather()
+        if retrieveWeatherWhenLocationComesAvailable {
+            retrieveWeatherWhenLocationComesAvailable = false
+            updateWeather()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -161,7 +154,7 @@ extension MainViewController: WeatherServiceDelegate {
             weather = oldWeather
         } else {
             print("*** No old weather data")
-//            statusLabel.text = "No weather data"
+            statusLabel.text = "No weather data"
         }
     }
     
