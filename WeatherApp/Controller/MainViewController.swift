@@ -45,6 +45,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = StyleKit.flatBlackLight
         clearUI()
         setupLocationManager()
         updateWeather()

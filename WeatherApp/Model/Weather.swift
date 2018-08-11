@@ -18,7 +18,7 @@ struct Weather: Codable {
     
     let currentCondition : String
     let temperature : Double
-    let pressure: Int
+    let pressure: Double
     let humidity: Int
     let windSpeed: Double
     let windDeg: Int
@@ -101,7 +101,7 @@ struct Weather: Codable {
             let currentCondition = weather["main"] as? String,
             let iconID = weather["icon"] as? String,
             let humidity = main["humidity"] as? Int,
-            let pressure = main["pressure"] as? Int,
+            let pressure = main["pressure"] as? Double,
             let windSpeed = wind["speed"] as? Double
         else { return nil }
         let windDeg = wind["deg"] as? Int ?? 90 // Sometimes the server dont send this value
