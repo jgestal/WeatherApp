@@ -9,7 +9,6 @@
 import UIKit
 
 class WeatherInfoContainer: UIView {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 4.0

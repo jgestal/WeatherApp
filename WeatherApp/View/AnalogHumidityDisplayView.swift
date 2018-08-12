@@ -10,7 +10,6 @@ import UIKit
 @IBDesignable
 class AnalogHumidityDisplayView: CustomTouchView {
     var humidity: Double?
-
     override func draw(_ rect: CGRect) {
         StyleKit.drawHumidityDisplay(frame: bounds, resizing: .aspectFit, humidity: CGFloat(humidity ?? 0), dayTheme: dayTheme)
     }
