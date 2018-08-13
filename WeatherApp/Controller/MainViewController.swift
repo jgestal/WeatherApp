@@ -106,6 +106,8 @@ class MainViewController: UIViewController {
     }
 }
 
+//MARK: Location
+
 extension MainViewController: CLLocationManagerDelegate {
     
     func setupLocationManager() {
@@ -147,6 +149,9 @@ extension MainViewController: CLLocationManagerDelegate {
     }
 }
 
+
+//MARK: Weather Service
+
 extension MainViewController: WeatherServiceDelegate {
     
     func weatherService(_ weatherService: WeatherService, didFail errorDesc: String) {
@@ -166,6 +171,7 @@ extension MainViewController: WeatherServiceDelegate {
 }
 
 
+//MARK: User Interaction
 extension MainViewController {
     
     @objc func humidityDisplayTapped() {
@@ -188,7 +194,7 @@ extension MainViewController {
     @objc func windCompassDisplayTapped() {
         print("Wind Compass Display Tapped")
         if let weather = weather {
-            let text = "The wind direction is \(weather.windDirection()) and its speed is \(weather.windSpeed) miles per hour."
+            let text = "The wind direction is \(weather.windDeg.windDirection()) and its speed is \(weather.windSpeed) miles per hour."
             SoundManager.shared.readText(text: text)
         }
     }

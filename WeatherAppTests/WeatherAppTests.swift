@@ -2,7 +2,7 @@
 //  WeatherAppTests.swift
 //  WeatherAppTests
 //
-//  Created by Juan Gestal Romani on 8/8/18.
+//  Created by Juan Gestal Romani on 13/8/18.
 //  Copyright © 2018 Juan Gestal Romani. All rights reserved.
 //
 
@@ -11,26 +11,34 @@ import XCTest
 
 class WeatherAppTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_Units_CelsiusUnits() {
+        XCTAssertEqual("23".celsiusUnits(), "23 °C")
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func test_Units_Mph() {
+        XCTAssertEqual("100".mphUnits(), "100 mph")
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_Units_KelvinToCelsius() {
+        XCTAssertEqual(23.0.kelvinToCelsius(), -250.15, accuracy: 0.000000001)
+        XCTAssertEqual(0.kelvinToCelsius(), -273.15, accuracy: 0.000000001)
+        XCTAssertEqual(273.15.kelvinToCelsius(), 0, accuracy: 0.000000001)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_Units_WindDirectionForDegrees() {
+        XCTAssertEqual(0.windDirection(), "East")
+        XCTAssertEqual(45.windDirection(), "North East")
+        XCTAssertEqual(90.windDirection(), "North")
+        XCTAssertEqual(135.windDirection(), "North West")
+        XCTAssertEqual(180.windDirection(), "West")
+        XCTAssertEqual(225.windDirection(), "South West")
+        XCTAssertEqual(270.windDirection(), "South")
+        XCTAssertEqual(315.windDirection(), "South East")
     }
+    
     
 }
+
+
+
+

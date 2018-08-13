@@ -9,8 +9,8 @@ target 'WeatherApp' do
   pod 'SVProgressHUD'
 
   target 'WeatherAppTests' do
-    inherit! :search_paths
+    inherit! :complete
     # Pods for testing
+    pod 'SVProgressHUD'
   end
-
 end

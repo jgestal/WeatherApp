@@ -13,7 +13,6 @@ struct Weather: Codable {
     static let kLastWeatherUpdate = "kLastWeatherUpdate"
     static let kBaseIconURL = "http://openweathermap.org/img/w/"
     static let kIconFileExtension = ".png"
-    static let kDateFormat = "HH:mm @ yyyy-MM-dd"
     static let kSecondsToExpire : TimeInterval = 86400 // Seconds per day: 86400
     
     let currentCondition : String
@@ -28,40 +27,6 @@ struct Weather: Codable {
     
     func iconURLString() -> String {
         return "\(Weather.kBaseIconURL)\(iconID)\(Weather.kIconFileExtension)"
-    }
-    
-    func dateString() -> String {
-        let date = Date.init(timeIntervalSinceReferenceDate: timestamp)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = Weather.kDateFormat
-        return dateFormatter.string(from: date)
-    }
-    
-    func windDirection() -> String {
-        if windDeg >= 30 && windDeg < 60 {
-            return "North West"
-        }
-        else if windDeg >= 60 && windDeg < 120 {
-            return "North"
-        }
-        else if windDeg >= 120 && windDeg < 150 {
-            return "North East"
-        }
-        else if windDeg >= 150 && windDeg < 210 {
-            return "East"
-        }
-        else if windDeg >= 210 && windDeg < 240 {
-            return "South East"
-        }
-        else if windDeg >= 240 && windDeg < 300 {
-            return "South"
-        }
-        else if windDeg >= 300 && windDeg < 330 {
-            return "South West"
-        }
-        else {
-            return "West"
-        }
     }
     
     func save() {
@@ -82,7 +47,6 @@ struct Weather: Codable {
     
     static func lastWeatherUpdate() -> Weather? {
         let decoder = JSONDecoder()
-        
         guard
             let data = UserDefaults.standard.value(forKey: Weather.kLastWeatherUpdate) as? Data,
             let weather = try? decoder.decode(Weather.self, from: data)
@@ -104,7 +68,7 @@ struct Weather: Codable {
             let pressure = main["pressure"] as? Double,
             let windSpeed = wind["speed"] as? Double
         else { return nil }
-        let windDeg = wind["deg"] as? Int ?? 90 // Sometimes the server dont send this value
+        let windDeg = wind["deg"] as? Int ?? 90 // Sometimes the server don't send this value
         
         let timestamp = Date.timeIntervalSinceReferenceDate
         let updatedWeather = Weather(currentCondition: currentCondition, temperature: temperature, pressure: pressure, humidity: humidity, windSpeed: windSpeed, windDeg: windDeg, iconID: iconID, timestamp: timestamp)

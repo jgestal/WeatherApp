@@ -80,12 +80,13 @@ class SimpleUIViewController: UIViewController {
         currentConditionLabel.text = weather.currentCondition
         temperatureLabel.text = String(weather.temperature.kelvinToCelsius()).celsiusUnits()
         windSpeedLabel.text = String(weather.windSpeed).mphUnits()
-        windDirectionLabel.text = weather.windDirection()
+        windDirectionLabel.text = weather.windDeg.windDirection()
         weatherIcon.loadImageUsingCache(withUrl: weather.iconURLString())
-        
-        statusLabel.text = "Last update: \(weather.dateString())"
+        statusLabel.text = "Last update: \(weather.timestamp.dateString())"
     }
 }
+
+//MARK: Location
 
 extension SimpleUIViewController: CLLocationManagerDelegate {
 
@@ -124,6 +125,8 @@ extension SimpleUIViewController: CLLocationManagerDelegate {
         }
     }
 }
+
+//MARK: Weather Service
 
 extension SimpleUIViewController: WeatherServiceDelegate {
     
