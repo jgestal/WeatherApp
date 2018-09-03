@@ -29,7 +29,7 @@ extension Double {
     }
     
     func kelvinToFahrenheit() -> Double {
-        return self - 459.67
+        return self * 9 / 5 - 459.67
     }
     
     func mphToKmh() -> Double {

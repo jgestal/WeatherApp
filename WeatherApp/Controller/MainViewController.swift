@@ -200,7 +200,7 @@ extension MainViewController {
                 let temperatureRounded = String(format: "%.1f", weather.temperature.kelvinToFahrenheit())
                 text = "The temperature is \(temperatureRounded) fahrenheit degrees"
             }
-            
+            print(text)
             SoundManager.shared.readText(text: text)
         }
     }
@@ -215,6 +215,7 @@ extension MainViewController {
             } else {
                 text = "The wind direction is \(weather.windDeg.windDirection()) and its speed is \(weather.windSpeed) miles per hour."
             }
+            print(text)
             SoundManager.shared.readText(text: text)
         }
     }
