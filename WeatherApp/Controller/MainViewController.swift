@@ -28,6 +28,8 @@ class MainViewController: UIViewController {
         }
     }
     
+    var isCelsiusKmhEnabled : Bool!
+    
     var retrieveWeatherWhenLocationComesAvailable = false
     @IBOutlet weak var deviceFrameView: DeviceFrameView!
     @IBOutlet weak var humidityDisplay: AnalogHumidityDisplayView!
@@ -37,6 +39,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var refreshButtonView: CustomButtonView!
     @IBOutlet weak var nightModeButtonView: CustomButtonView!
     @IBOutlet weak var creditsButtonView: CustomButtonView!
+    @IBOutlet weak var unitsButtonView: CustomButtonView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
@@ -54,11 +57,10 @@ class MainViewController: UIViewController {
         termometer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(termometerTapped)))
         windCompassDisplay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(windCompassDisplayTapped)))
         backView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backViewTapped)))
-        [refreshButtonView,nightModeButtonView,creditsButtonView].forEach {
+        [refreshButtonView,nightModeButtonView,creditsButtonView,unitsButtonView].forEach {
             $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(customButtonTapped)))
         }
     }
-    
     
     func updateWeather() {
         weather = nil
@@ -93,14 +95,17 @@ class MainViewController: UIViewController {
         print("*** Update UI")
         if let weather = weather {
             [humidityDisplay,termometer,windCompassDisplay].forEach { $0.fadeIn() }
-             windCompassDisplay.update(angle: Double(weather.windDeg), velocityText: String(weather.windSpeed).mphUnits())
-            termometer.update(degrees: weather.temperature.kelvinToCelsius())
+            isCelsiusKmhEnabled = UserDefaults.standard.bool(forKey: "isCelsiusKmhUnitsEnabled")
+            let windSpeed = isCelsiusKmhEnabled ? String(weather.windSpeed.mphToKmh()).kmhUnits() : String(weather.windSpeed).mphUnits()
+            windCompassDisplay.update(angle: Double(weather.windDeg), velocityText: windSpeed)
+            termometer.update(degrees: weather.temperature.kelvinToCelsius(), isCelsiusKmhEnabled: isCelsiusKmhEnabled)
             humidityDisplay.update(humidity: Double(weather.humidity) / 100)
+
         } else {
             [humidityDisplay,termometer,windCompassDisplay].forEach { $0.fadeOut() }
         }
         let theme = dayTheme
-        [windCompassDisplay,termometer,humidityDisplay,refreshButtonView,nightModeButtonView,creditsButtonView].forEach { $0.dayTheme = theme }
+        [windCompassDisplay,termometer,humidityDisplay,refreshButtonView,nightModeButtonView,creditsButtonView,unitsButtonView].forEach { $0.dayTheme = theme }
         [titleLabel,statusLabel].forEach { $0?.textColor = theme ? StyleKit.flatBlackLight : StyleKit.flatWhiteLight }
         deviceFrameView.dayTheme = theme
     }
@@ -185,8 +190,17 @@ extension MainViewController {
     @objc func termometerTapped() {
         print("Termometer Tapped")
         if let weather = weather {
-            let temperatureRounded = String(format: "%.1f", weather.temperature.kelvinToCelsius())
-            let text = "The temperature is \(temperatureRounded) degrees"
+            var text : String!
+            isCelsiusKmhEnabled = UserDefaults.standard.bool(forKey: "isCelsiusKmhUnitsEnabled")
+            if isCelsiusKmhEnabled {
+                let temperatureRounded = String(format: "%.1f", weather.temperature.kelvinToCelsius())
+               text = "The temperature is \(temperatureRounded) celsius degrees"
+
+            } else {
+                let temperatureRounded = String(format: "%.1f", weather.temperature.kelvinToFahrenheit())
+                text = "The temperature is \(temperatureRounded) fahrenheit degrees"
+            }
+            
             SoundManager.shared.readText(text: text)
         }
     }
@@ -194,7 +208,13 @@ extension MainViewController {
     @objc func windCompassDisplayTapped() {
         print("Wind Compass Display Tapped")
         if let weather = weather {
-            let text = "The wind direction is \(weather.windDeg.windDirection()) and its speed is \(weather.windSpeed) miles per hour."
+            isCelsiusKmhEnabled = UserDefaults.standard.bool(forKey: "isCelsiusKmhUnitsEnabled")
+            var text : String!
+            if isCelsiusKmhEnabled {
+                text = "The wind direction is \(weather.windDeg.windDirection()) and its speed is \(weather.windSpeed.mphToKmh()) kilometers per hour."
+            } else {
+                text = "The wind direction is \(weather.windDeg.windDirection()) and its speed is \(weather.windSpeed) miles per hour."
+            }
             SoundManager.shared.readText(text: text)
         }
     }
@@ -211,6 +231,11 @@ extension MainViewController {
             print("*** Credits Button Tapped")
             updateUI()
             flip(firstView: frontView, secondView: backView)
+        case 3:
+            isCelsiusKmhEnabled = UserDefaults.standard.bool(forKey: "isCelsiusKmhUnitsEnabled")
+            UserDefaults.standard.set(!isCelsiusKmhEnabled, forKey: "isCelsiusKmhUnitsEnabled")
+            UserDefaults.standard.synchronize()
+            updateUI()
         default:
             break
         }
@@ -223,7 +248,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func flip(firstView: UIView, secondView: UIView) {
-        let transitionOptions: UIViewAnimationOptions = [.transitionFlipFromTop, .showHideTransitionViews]
+        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromTop, .showHideTransitionViews]
         UIView.transition(with: firstView, duration: 1.0, options: transitionOptions, animations: {
             firstView.isHidden = true
         })

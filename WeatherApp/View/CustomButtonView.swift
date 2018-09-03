@@ -20,6 +20,8 @@ class CustomButtonView: CustomTouchView {
             StyleKit.drawNightModeButton(frame: bounds, resizing: .aspectFill, dayTheme: dayTheme)
         case 2:
             StyleKit.drawCreditsButton(frame: bounds, resizing: .aspectFill, dayTheme: dayTheme)
+        case 3:
+            StyleKit.drawSquareButton(frame: bounds, resizing: .aspectFill, dayTheme: dayTheme)
         default:
             break
         }

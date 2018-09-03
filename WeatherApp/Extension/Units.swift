@@ -12,8 +12,14 @@ extension String {
     func celsiusUnits() -> String {
         return self + " °C"
     }
+    func fahrenheitUnits() -> String  {
+        return self + " °F"
+    }
     func mphUnits() -> String {
         return self + " mph"
+    }
+    func kmhUnits() -> String {
+        return self + " km/h"
     }
 }
 
@@ -21,7 +27,22 @@ extension Double {
     func kelvinToCelsius() -> Double {
         return self - 273.15
     }
+    
+    func kelvinToFahrenheit() -> Double {
+        return self - 459.67
+    }
+    
+    func mphToKmh() -> Double {
+        return (self * 1.60934).rounded(toPlaces: 2)
+    }
+    
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
+
+
 
 extension Int {
     func windDirection() -> String {

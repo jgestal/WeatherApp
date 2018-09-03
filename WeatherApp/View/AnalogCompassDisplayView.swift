@@ -12,7 +12,7 @@ class AnalogCompassDisplayView: CustomTouchView {
     var angle: Double?
     var velocityText: String?
     override func draw(_ rect: CGRect) {
-        StyleKit.drawCompassDisplay(frame: bounds, resizing: .aspectFit, compassAngle: CGFloat(angle ?? 0), compassVelocityText: velocityText ?? "0 mph", dayTheme: dayTheme)
+        StyleKit.drawCompassDisplay(frame: bounds, resizing: .aspectFit, compassAngle: CGFloat(angle ?? 0), compassVelocityText: velocityText ?? "0", dayTheme: dayTheme)
     }
     func update(angle: Double, velocityText: String) {
         self.angle = angle

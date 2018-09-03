@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		23C6269921210AD900F061D4 /* WeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C6269821210AD900F061D4 /* WeatherAppTests.swift */; };
 		23DBBA59211B25870009237E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA58211B25870009237E /* AppDelegate.swift */; };
-		23DBBA5B211B25870009237E /* SimpleUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DBBA5A211B25870009237E /* SimpleUIViewController.swift */; };
 		23DBBA5E211B25870009237E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA5C211B25870009237E /* Main.storyboard */; };
 		23DBBA60211B25880009237E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA5F211B25880009237E /* Assets.xcassets */; };
 		23DBBA63211B25880009237E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DBBA61211B25880009237E /* LaunchScreen.storyboard */; };
@@ -54,7 +53,6 @@
 		23C6269A21210AD900F061D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23DBBA55211B25870009237E /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DBBA58211B25870009237E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		23DBBA5A211B25870009237E /* SimpleUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUIViewController.swift; sourceTree = "<group>"; };
 		23DBBA5D211B25870009237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		23DBBA5F211B25880009237E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23DBBA62211B25880009237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 		23DBBA81211B68530009237E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				23DBBA5A211B25870009237E /* SimpleUIViewController.swift */,
 				23DBBA8B211DCD190009237E /* MainViewController.swift */,
 			);
 			path = Controller;
@@ -288,10 +285,12 @@
 				TargetAttributes = {
 					23C6269521210AD900F061D4 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 23DBBA54211B25870009237E;
 					};
 					23DBBA54211B25870009237E = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -428,7 +427,6 @@
 				23DBBA85211B68910009237E /* Units.swift in Sources */,
 				23DBBA8A211DCC090009237E /* StyleKit.swift in Sources */,
 				23DBBA90211DCE4A0009237E /* AnalogHumidityDisplayView.swift in Sources */,
-				23DBBA5B211B25870009237E /* SimpleUIViewController.swift in Sources */,
 				23DBBA92211DCE7D0009237E /* AnalogCompassDisplayView.swift in Sources */,
 				23DBBAA2211F0D900009237E /* IconPatternView.swift in Sources */,
 				23DBBA98211DD3CC0009237E /* DeviceFrameView.swift in Sources */,
@@ -483,10 +481,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherApp.app/WeatherApp";
 			};
@@ -500,10 +502,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = es.gestal.WeatherAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeatherApp.app/WeatherApp";
 			};
@@ -633,11 +639,14 @@
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pixfans.electronicWeatherStation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -652,11 +661,14 @@
 				DEVELOPMENT_TEAM = 8844D67WZE;
 				INFOPLIST_FILE = WeatherApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pixfans.electronicWeatherStation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
