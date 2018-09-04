@@ -249,7 +249,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func flip(firstView: UIView, secondView: UIView) {
-        let transitionOptions: UIView.AnimationOptions = [.transitionFlipFromTop, .showHideTransitionViews]
+        let transitionOptions: UIViewAnimationOptions = [.transitionFlipFromTop, .showHideTransitionViews]
         UIView.transition(with: firstView, duration: 1.0, options: transitionOptions, animations: {
             firstView.isHidden = true
         })
