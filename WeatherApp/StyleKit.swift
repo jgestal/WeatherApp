@@ -138,7 +138,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: textStyle,
-        ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -156,7 +156,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: text2Style,
-        ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -174,7 +174,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: text3Style,
-        ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
 
         let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()
@@ -192,7 +192,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: text4Style,
-        ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
 
         let text4TextHeight: CGFloat = text4TextContent.boundingRect(with: CGSize(width: text4Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text4FontAttributes, context: nil).height
         context.saveGState()
@@ -210,7 +210,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nEStyle,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nETextHeight: CGFloat = nETextContent.boundingRect(with: CGSize(width: nERect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nEFontAttributes, context: nil).height
         context.saveGState()
@@ -228,7 +228,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nE2Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nE2TextHeight: CGFloat = nE2TextContent.boundingRect(with: CGSize(width: nE2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nE2FontAttributes, context: nil).height
         context.saveGState()
@@ -246,7 +246,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nE3Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nE3TextHeight: CGFloat = nE3TextContent.boundingRect(with: CGSize(width: nE3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nE3FontAttributes, context: nil).height
         context.saveGState()
@@ -264,7 +264,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nE4Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nE4TextHeight: CGFloat = nE4TextContent.boundingRect(with: CGSize(width: nE4Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nE4FontAttributes, context: nil).height
         context.saveGState()
@@ -321,7 +321,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 24)!,
             .foregroundColor: darkTextColor,
             .paragraphStyle: text5Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text5TextHeight: CGFloat = compassVelocityText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
         context.saveGState()
@@ -358,7 +358,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "HelveticaNeue", size: 12)!,
             .foregroundColor: UIColor.black,
             .paragraphStyle: oval3Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         "\n".draw(in: oval3Rect, withAttributes: oval3FontAttributes)
 
@@ -493,7 +493,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 16)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: text4Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text4TextHeight: CGFloat = termometer10CelsiusText.boundingRect(with: CGSize(width: text4Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text4FontAttributes, context: nil).height
         context.saveGState()
@@ -510,7 +510,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 16)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: textStyle,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let textTextHeight: CGFloat = termometer20CelsiusText.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -527,7 +527,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 16)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: text2Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text2TextHeight: CGFloat = termometer30CelsiusText.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -544,7 +544,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 16)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: text3Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text3TextHeight: CGFloat = termometer40CelsiusText.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()
@@ -659,7 +659,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: text5Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text5TextHeight: CGFloat = termometerUnits.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
         context.saveGState()
@@ -781,7 +781,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: textStyle,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -799,7 +799,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: text3Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text3TextHeight: CGFloat = text3TextContent.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()
@@ -817,7 +817,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 25)!,
             .foregroundColor: mediumTextColor,
             .paragraphStyle: text4Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text4TextHeight: CGFloat = text4TextContent.boundingRect(with: CGSize(width: text4Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text4FontAttributes, context: nil).height
         context.saveGState()
@@ -835,7 +835,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nEStyle,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nETextHeight: CGFloat = nETextContent.boundingRect(with: CGSize(width: nERect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nEFontAttributes, context: nil).height
         context.saveGState()
@@ -853,7 +853,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: lightTextColor,
             .paragraphStyle: nE2Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let nE2TextHeight: CGFloat = nE2TextContent.boundingRect(with: CGSize(width: nE2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: nE2FontAttributes, context: nil).height
         context.saveGState()
@@ -917,7 +917,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: 24)!,
             .foregroundColor: darkTextColor,
             .paragraphStyle: text5Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text5TextHeight: CGFloat = humidityDisplayText.boundingRect(with: CGSize(width: text5Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text5FontAttributes, context: nil).height
         context.saveGState()
@@ -958,7 +958,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "HelveticaNeue", size: 12)!,
             .foregroundColor: UIColor.black,
             .paragraphStyle: oval3Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         "\n".draw(in: oval3Rect, withAttributes: oval3FontAttributes)
 
@@ -1444,7 +1444,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.systemFontSize)!,
             .foregroundColor: flatSkyBlueLight,
             .paragraphStyle: textStyle,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -1462,7 +1462,7 @@ public class StyleKit : NSObject {
             .font: UIFont(name: "Futura-Medium", size: UIFont.smallSystemFontSize)!,
             .foregroundColor: UIColor.black,
             .paragraphStyle: text2Style,
-        ] as [NSAttributedStringKey: Any]
+        ] as [NSAttributedString.Key: Any]
 
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
